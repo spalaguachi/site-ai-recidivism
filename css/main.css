@@ -189,7 +189,7 @@ p, span{
   color: #fff;
   font-size: 1.2rem;
   text-decoration: none;
-  position: relative;
+ /* position: initial;*/
   bottom: 320px;
   left: 28px;
 }
