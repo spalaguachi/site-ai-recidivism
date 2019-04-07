@@ -78,13 +78,18 @@
       parameters have a significant impact on the model</p> -->
         <button type="button" onclick="myFunction()">Submit</button>
       parameters have a significant impact on the model</p>
-       <script type="text/javascript">
-        $("results").hide();
-        
-        console.log("HELLOS")
-      </script>
-      
-  <div class="row-fluid" id="results">
+      <!-- @section Scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                $("#Create").toggle();
+            });
+        });
+        </script>
+        } -->
+      <div class="row-fluid" id="results" >
+  <!-- <div class="row-fluid" id="results" style="display:none"> -->
    <div class="col-sm-8" id="results">
     <select multiple="multiple" name="duallistbox_permissions[]" id="rank">
         
@@ -102,6 +107,7 @@
       
       var input, text;
 
+
       // Get the value of the input field with id="numb"
       input = document.getElementById("numb").value;
       $("#rank").show();
@@ -111,7 +117,7 @@
       //document.getElementById("results").innerHTML = obj.name + "\n" + obj.age;
       
       // selectValues = { "1": "test 1", "2": "test 2","3": "test 3", "4": "test 4", "5": "test 5", "6": "test 6", "7": "test 7", "8": "test 8", "9": "test 9", "10": "test 10"};
-      selectValues = {
+      s11electValues = {
         "topk": [
            "age_cat_Less than 25",
            "race_African-American",
@@ -126,27 +132,29 @@
         ]
       };
 
+      var optionsV = []
       /*OPTION 2*/
       //$.getJSON("src/top-k.js", function(options){
-      // $.getJSON("http://10.189.89.9:8080/top-k", function(options){
+      $.getJSON("http://10.189.89.9:8080/top-k", function(selectValues){
+        $.each(selectValues.topk, function(key, topkval) {
+          console.log(topkval);
+          optionsV.push ($('<option>', { value : topkval })
+                .text(topkval));
+        });
+      });
+    
+      $('#rank').append(optionsV);
+
+      // var options = [];
+
+      /*OPTION 1*/
+      // var options = [];
       //   $.each(selectValues.topk, function(key, topkval) {
       //     console.log(topkval);
       //     options.push ($('<option>', { value : topkval })
       //           .text(topkval));
       //   });
-      // });
       // $('#rank').append(options);
-
-      // var options = [];
-
-      /*OPTION 1*/
-      var options = [];
-        $.each(selectValues.topk, function(key, topkval) {
-          console.log(topkval);
-          options.push ($('<option>', { value : topkval })
-                .text(topkval));
-        });
-      $('#rank').append(options);
 
       
       
