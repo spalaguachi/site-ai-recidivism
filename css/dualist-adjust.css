@@ -1,0 +1,11 @@
+button.move, button.remove{
+  display: none;
+}
+.btn-group{
+  width: 100%;
+}
+button.moveall, button.removeall{
+  background-color: #ececec;
+  width: inherit;
+}
+
