@@ -93,6 +93,7 @@
   <div class="form_container">
       <form id="myform" onsubmit="return handle_form_submission()">
             <button type='submit'>Submit</button>
+
       </form>
   </div>
     <script type="text/javascript">
@@ -124,13 +125,33 @@
            "age_cat_Greater than 45"
         ]
       };
-     
+
+      /*OPTION 2*/
+      //$.getJSON("src/top-k.js", function(options){
+      // $.getJSON("http://10.189.89.9:8080/top-k", function(options){
+      //   $.each(selectValues.topk, function(key, topkval) {
+      //     console.log(topkval);
+      //     options.push ($('<option>', { value : topkval })
+      //           .text(topkval));
+      //   });
+      // });
+      // $('#rank').append(options);
+
+      // var options = [];
+
+      /*OPTION 1*/
       var options = [];
-      $.each(selectValues.topk, function(key, topkval) {
+        $.each(selectValues.topk, function(key, topkval) {
+          console.log(topkval);
           options.push ($('<option>', { value : topkval })
                 .text(topkval));
-      });
+        });
       $('#rank').append(options);
+
+      
+      
+  
+      
 
       jQuery(function($){
                 var duallist = $('#rank').bootstrapDualListbox();
@@ -138,8 +159,14 @@
                 //   var id = $(this).children(":selected").attr("id");});
       });
       
-/*SUBMIT RETRIEVAL*/
-    
+
+    }//end of function
+
+    function  handle_form_submission(){
+
+      /*SUBMIT RETRIEVAL*/
+      var topk={},optionValues=[];
+
       $('#state option').each(function() {
           optionValues.push($(this).text());
       });
@@ -147,8 +174,9 @@
       topk = {"revisedtop_k": optionValues}
 
       console.log(topk);
-/**/
-    }//end of function
+    /**/
+
+    }
     </script>
 
     
