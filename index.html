@@ -17,6 +17,15 @@
   <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Ledger" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+
+  <!--DualList Box-->
+  <link rel="stylesheet" href="css/dualist-adjust.css">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-duallistbox@3.0.6/dist/jquery.bootstrap-duallistbox.min.js"></script>
+
+
+ 
 </head>
 
 <body>
@@ -29,7 +38,7 @@
       
       <!--<div class="header-overlay"></div>-->
     
-    <div class="header-title"; style="padding: 20% 0%;text-align: center;"">
+    <div class="header-title"; style="padding: 20% 0%;text-align: center;">
        <h1 style="color=#000000;"> AI & Recidivism</h1>
     </div>
    
@@ -62,20 +71,97 @@
 
   <section class="section section-light">
     <h1>Parameter Analysis</h1>
-     <pre>
-     <p>The top <input  type='submit' value='_____'/>parameters will have the most impact on the model.</p>
-     </pre>
-     <form class="form-inline" style="display:inline-block">
-        <div class="form-group">
-          <label for="number">The top</label>
-             <input type="number" id="number" class="form-control mx-sm-3">
-          <label for="number">parameters will have the most impact on the model.</label>
-            
-          </small>
-        </div>
-     </form>                                  
+    
+      <p>The top
+        <input id="numb">
+         <!-- <button type="button">Submit</button>
+      parameters have a significant impact on the model</p> -->
+        <button type="button" onclick="myFunction()">Submit</button>
+      parameters have a significant impact on the model</p>
+       <script type="text/javascript">
+        $("results").hide();
+        
+        console.log("HELLOS")
+      </script>
+      
+  <div class="row-fluid" id="results">
+   <div class="col-sm-8" id="results">
+    <select multiple="multiple" name="duallistbox_permissions[]" id="rank">
+        
+    </select>
+  </div>
+  <div class="form_container">
+      <form id="myform" onsubmit="return handle_form_submission()">
+            <button type='submit'>Submit</button>
+      </form>
+  </div>
+    <script type="text/javascript">
+
+    function myFunction() {
+      
+      var input, text;
+
+      // Get the value of the input field with id="numb"
+      input = document.getElementById("numb").value;
+      $("#rank").show();
+
+      // var txt = '{"name":["John", "name","city","New York","cat","6", "seven", "8","9","10"]}'
+      // var obj = JSON.parse(txt);
+      //document.getElementById("results").innerHTML = obj.name + "\n" + obj.age;
+      
+      // selectValues = { "1": "test 1", "2": "test 2","3": "test 3", "4": "test 4", "5": "test 5", "6": "test 6", "7": "test 7", "8": "test 8", "9": "test 9", "10": "test 10"};
+      selectValues = {
+        "topk": [
+           "age_cat_Less than 25",
+           "race_African-American",
+           "priors_count",
+           "c_arrest_age_in_days",
+           "c_offense_age_in_days",
+           "r_offense_age_in_days",
+           "c_jail_in_age_in_days",
+           "r_jail_in_age_in_days",
+           "vr_offense_age_in_days",
+           "age_cat_Greater than 45"
+        ]
+      };
+     
+      var options = [];
+      $.each(selectValues.topk, function(key, topkval) {
+          options.push ($('<option>', { value : topkval })
+                .text(topkval));
+      });
+      $('#rank').append(options);
+
+      jQuery(function($){
+                var duallist = $('#rank').bootstrapDualListbox();
+                // $("#my_select").change(function() {
+                //   var id = $(this).children(":selected").attr("id");});
+      });
+      
+/*SUBMIT RETRIEVAL*/
+    
+      $('#state option').each(function() {
+          optionValues.push($(this).text());
+      });
+
+      topk = {"revisedtop_k": optionValues}
+
+      console.log(topk);
+/**/
+    }//end of function
+    </script>
+
+    
+  </div>
+
     <p> The top ____ parameters will have the most impact on the model. </p>
+   
+</div>
+
+  
   </section>
+
+
 
  <!-- <div class="parallax-img2">
     <div class="ptext">
@@ -86,7 +172,7 @@
   </div>-->
 
   <div class="section section-dark">
-    <h2>Results</h2>
+    <h2>Accuracy Prediction</h2>
         <p>toggle inputs/results</p>
      <h2>x</h2>
     <p>
@@ -107,6 +193,7 @@
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quisquam voluptatum quidem praesentium temporibus eaque commodi nihil, rerum saepe in perspiciatis. Odit, blanditiis eius debitis, quisquam et optio! Iure nesciunt commodi nulla aliquam culpa fugit nihil laboriosam soluta repellat consequuntur magnam repudiandae odio reiciendis, veniam illo, modi quibusdam impedit deleniti?
     </p>
+    
   </div>
 
   <div class="parallax-img2">
